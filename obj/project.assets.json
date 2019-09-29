@@ -822,23 +822,23 @@
     ]
   },
   "packageFolders": {
-    "/home/zack/.nuget/packages/": {},
-    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\Zachary\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/zack/Projects/Physics Sim/Physics Sim.csproj",
+      "projectUniqueName": "C:\\Users\\Zachary\\Documents\\Physics Sim\\Physics-SIm\\Physics Sim.csproj",
       "projectName": "Physics Sim",
-      "projectPath": "/home/zack/Projects/Physics Sim/Physics Sim.csproj",
-      "packagesPath": "/home/zack/.nuget/packages/",
-      "outputPath": "/home/zack/Projects/Physics Sim/obj/",
+      "projectPath": "C:\\Users\\Zachary\\Documents\\Physics Sim\\Physics-SIm\\Physics Sim.csproj",
+      "packagesPath": "C:\\Users\\Zachary\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Zachary\\Documents\\Physics Sim\\Physics-SIm\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/home/zack/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Zachary\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"

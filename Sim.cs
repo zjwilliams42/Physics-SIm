@@ -31,7 +31,6 @@ namespace Physics_Sim
             system = coordinateSystem.getGraphic();
 
             // This part is just for testing, getting prepped to set up the vector class.
-            System.Console.Write( System.Math.Sin(System.Math.PI * 35.0 / 180.0) ); 
 
             base.Initialize();
         }
