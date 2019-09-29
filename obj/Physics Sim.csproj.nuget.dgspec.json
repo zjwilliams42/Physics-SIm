@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/zack/Projects/Physics Sim/Physics Sim.csproj": {}
+  },
+  "projects": {
+    "/home/zack/Projects/Physics Sim/Physics Sim.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/zack/Projects/Physics Sim/Physics Sim.csproj",
+        "projectName": "Physics Sim",
+        "projectPath": "/home/zack/Projects/Physics Sim/Physics Sim.csproj",
+        "packagesPath": "/home/zack/.nuget/packages/",
+        "outputPath": "/home/zack/Projects/Physics Sim/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/zack/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.0": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.0, )",
+              "autoReferenced": true
+            },
+            "MonoGame.Content.Builder": {
+              "target": "Package",
+              "version": "[3.7.0.9, )"
+            },
+            "MonoGame.Framework.DesktopGL.Core": {
+              "target": "Package",
+              "version": "[3.7.0.7, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
