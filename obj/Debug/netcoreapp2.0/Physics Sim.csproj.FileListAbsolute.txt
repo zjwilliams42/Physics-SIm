@@ -19,4 +19,4 @@ C:\Users\Zachary\Documents\Physics Sim\Physics-SIm\obj\Debug\netcoreapp2.0\Physi
 C:\Users\Zachary\Documents\Physics Sim\Physics-SIm\obj\Debug\netcoreapp2.0\Physics Sim.AssemblyInfo.cs
 C:\Users\Zachary\Documents\Physics Sim\Physics-SIm\obj\Debug\netcoreapp2.0\Physics Sim.dll
 C:\Users\Zachary\Documents\Physics Sim\Physics-SIm\obj\Debug\netcoreapp2.0\Physics Sim.pdb
-C:\Users\Zachary\Documents\Physics Sim\Physics-SIm\obj\Debug\netcoreapp2.0\Physics Sim.csproj.CoreCompileInputs.cache
+C:\Users\Zachary\Documents\Physics Sim\Physics-Sim\obj\Debug\netcoreapp2.0\Physics Sim.csproj.CoreCompileInputs.cache

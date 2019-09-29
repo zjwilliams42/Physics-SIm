@@ -28,7 +28,9 @@ namespace Physics_Sim
             dimensions[0] = 301.0f;
             dimensions[1] = 301.0f;
             coordinateSystem = new CoordinateSystem(graphics.GraphicsDevice, dimensions);
-            system = coordinateSystem.getGraphic();
+            
+            //system = coordinateSystem.getGraphic();
+            system = coordinateSystem.render();
 
             // This part is just for testing, getting prepped to set up the vector class.
 

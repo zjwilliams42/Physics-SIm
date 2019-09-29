@@ -51,6 +51,33 @@ namespace Physics_Sim
                 return coordinateSystem * M_worldtocamera;
             }
 
+            public Texture2D render()
+            {
+                Vector vertex_world = new Vector(0, 0, 0, 0);
+
+                Vector vertex_camera = vertex_world * worldToCamera();
+
+                float vertex_camera_x = (float) (-1 * vertex_camera[0] / vertex_camera[2]);
+                float vertex_camera_y = (float) (-1 * vertex_camera[1] / vertex_camera[2]);
+
+
+
+                // This part and below likely need modification.
+                if (dimensions.Length != 2) { return null; }
+                int x = (int) (dimensions[0] + 0.5);
+                int y = (int) (dimensions[1] + 0.5);
+
+                Texture2D line = new Texture2D(graphicsDevice, x, y);
+                Color[] data = new Color[x * y];
+
+                //for (int i = 0; i < x * y; i++) { data[i] = Color.White; }
+
+                data[x * (int)(vertex_camera_y) + (int)(vertex_camera_x)] = Color.White;
+                
+                line.SetData<Color>(data);
+                return line;
+            }
+
             public Texture2D getGraphic()
             {
                 if (dimensions.Length != 2) { return null; }
