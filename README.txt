@@ -19,3 +19,6 @@ https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 
 Boshart's Compter Graphics. This one is in C++;
 http://mboshart.dyndns.org/~mboshart/4750programs.html
+
+Microsoft Docs for Xna:
+https://docs.microsoft.com/en-us/xamarin/graphics-games/monogame/3d/part2

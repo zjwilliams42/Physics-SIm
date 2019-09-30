@@ -11,7 +11,7 @@ namespace Physics_Sim
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D system;
+        CoordinateSystem system;
 
         public Sim()
         {
@@ -23,14 +23,7 @@ namespace Physics_Sim
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            CoordinateSystem coordinateSystem;
-            float[] dimensions = new float[2];
-            dimensions[0] = 301.0f;
-            dimensions[1] = 301.0f;
-            coordinateSystem = new CoordinateSystem(graphics.GraphicsDevice, dimensions);
-            
-            //system = coordinateSystem.getGraphic();
-            system = coordinateSystem.render();
+            system = new CoordinateSystem(graphics);
 
             // This part is just for testing, getting prepped to set up the vector class.
 
@@ -56,12 +49,10 @@ namespace Physics_Sim
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-            spriteBatch.Draw(system, new Vector2(10, 10), Color.White);
-            spriteBatch.End();
+            system.render();
 
             base.Draw(gameTime);
         }

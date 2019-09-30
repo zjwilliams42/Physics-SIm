@@ -8,15 +8,13 @@ namespace Physics_Sim
     {
         public class CoordinateSystem
         {
-            GraphicsDevice graphicsDevice;
-            float[] dimensions;
+            GraphicsDeviceManager graphics;
 
             Microsoft.Xna.Framework.Matrix coordinateSystem;
 
-            public CoordinateSystem(GraphicsDevice graphicsDevice, float[] dimensions)
+            public CoordinateSystem(GraphicsDeviceManager graphics)
             {
-                this.graphicsDevice = graphicsDevice;
-                this.dimensions = dimensions;
+                this.graphics = graphics;
 
                 coordinateSystem = new Microsoft.Xna.Framework.Matrix(
                     1, 0, 0, 0,
@@ -26,76 +24,55 @@ namespace Physics_Sim
                 );
             }
 
-            public CoordinateSystem localToWorld() { return null; } // P_world = P_local * M
-            public CoordinateSystem worldToLocal() { return null; } // P_local = P_world * M^-1
-            public Microsoft.Xna.Framework.Matrix worldToCamera()
+            public void render()
             {
-                // P_camera = P_world * M_world-to-camera
-                int screen_width = 800;
-                int screen_height = 480;
-                int z_far = 10;
-                int z_near = 0;
+                BasicEffect effect = new BasicEffect(graphics.GraphicsDevice);
+                effect.VertexColorEnabled = true;
 
-                float M_00 = ( 1 / screen_width );
-                float M_11 = ( 1 / screen_height );
-                float M_22 = ( -1 * 2 / (z_far - z_near) );
-                float M_23 = ( -1 * (z_far + z_near) / (z_far - z_near) );
-
-                Microsoft.Xna.Framework.Matrix M_worldtocamera = new Microsoft.Xna.Framework.Matrix(
-                    M_00, 0, 0, 0,
-                    0, M_11, 0, 0,
-                    0, 0, M_22, M_23,
-                    0, 0, 0, 1
-                );
-
-                return coordinateSystem * M_worldtocamera;
-            }
-
-            public Texture2D render()
-            {
-                Vector vertex_world = new Vector(0, 0, 0, 0);
-
-                Vector vertex_camera = vertex_world * worldToCamera();
-
-                float vertex_camera_x = (float) (-1 * vertex_camera[0] / vertex_camera[2]);
-                float vertex_camera_y = (float) (-1 * vertex_camera[1] / vertex_camera[2]);
-
-
-
-                // This part and below likely need modification.
-                if (dimensions.Length != 2) { return null; }
-                int x = (int) (dimensions[0] + 0.5);
-                int y = (int) (dimensions[1] + 0.5);
-
-                Texture2D line = new Texture2D(graphicsDevice, x, y);
-                Color[] data = new Color[x * y];
-
-                //for (int i = 0; i < x * y; i++) { data[i] = Color.White; }
-
-                data[x * (int)(vertex_camera_y) + (int)(vertex_camera_x)] = Color.White;
+                Vector3 cameraPosition = new Vector3(25, 25, 25);
+                Vector3 cameraLookAtVector = Vector3.Zero;
+                Vector3 cameraUpVector = Vector3.UnitY;
+                effect.View = Matrix.CreateLookAt(cameraPosition, cameraLookAtVector, cameraUpVector);
+            
+                float aspectRatio = graphics.PreferredBackBufferWidth / (float) graphics.PreferredBackBufferHeight;
+                float fieldOfView = 0.50f;
+                float nearClipPlane = 1;
+                float farClipPlane = 200;
+                effect.Projection = Matrix.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, nearClipPlane, farClipPlane);
                 
-                line.SetData<Color>(data);
-                return line;
-            }
+                //int width = graphics.GraphicsDevice.Viewport.Width;
+                //int height = graphics.GraphicsDevice.Viewport.Height;
+                //float nearClipPlane = 1;
+                //float farClipPlane = 200;
+                //effect.Projection = Matrix.CreateOrthographic(width, height, nearClipPlane, farClipPlane);
 
-            public Texture2D getGraphic()
-            {
-                if (dimensions.Length != 2) { return null; }
-                int x = (int) (dimensions[0] + 0.5);
-                int y = (int) (dimensions[1] + 0.5);
+                VertexPositionColor[] vectorVertices;
+                vectorVertices = new VertexPositionColor[6];
+                vectorVertices[0].Position = new Vector3(-10, 0, 0);
+                vectorVertices[1].Position = new Vector3(10, 0, 0);
+                vectorVertices[2].Position = new Vector3(0, -10, 0);
+                vectorVertices[3].Position = new Vector3(0, 10, 0);
+                vectorVertices[4].Position = new Vector3(0, 0, -10);
+                vectorVertices[5].Position = new Vector3(0, 0, 10);
 
-                Texture2D line = new Texture2D(graphicsDevice, x, y);
-                Color[] data = new Color[x * y];
+                vectorVertices[0].Color = Color.Red;
+                vectorVertices[1].Color = Color.Red;
+                vectorVertices[2].Color = Color.Green;
+                vectorVertices[3].Color = Color.Green;
+                vectorVertices[4].Color = Color.Blue;
+                vectorVertices[5].Color = Color.Blue;
 
-                //for (int i = 0; i < x * y; i++) { data[i] = Color.White; }
+                foreach (var pass in effect.CurrentTechnique.Passes)
+                {
+                    pass.Apply ();
 
-                int axis = x * (y - 1) / 2;
-                for (int i = 0; i < x; i++) { data[axis + i] = Color.Red; }
-                axis = (x - 1) / 2;
-                for (int i = 0; i < y; i++) { data[axis + i * x] = Color.Blue; }
-                
-                line.SetData<Color>(data);
-                return line;
+                    graphics.GraphicsDevice.DrawUserPrimitives (
+                        PrimitiveType.LineList,
+                        vectorVertices,
+                        0,
+                        3
+                    );
+                }
             }
         }
     }
