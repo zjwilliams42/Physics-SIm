@@ -163,18 +163,18 @@ namespace Physics_Sim
                 // draw a vector
                 VertexPositionColor[] v = new VertexPositionColor[6];
 
-                Vector a = new Vector(5, 45);
+                Vector a = new Vector(5, 37);
                 v[0] = new VertexPositionColor(a.Origin(), Color.Red);
-                v[1] = new VertexPositionColor(a.Components(), Color.Red);
+                v[1] = new VertexPositionColor(a.Components() + a.Origin(), Color.Red);
 
 
-                Vector b = new Vector(2, 30, a.Components());
+                Vector b = new Vector(5, 53, a.Components());
                 v[2] = new VertexPositionColor(b.Origin(), Color.Green);
-                v[3] = new VertexPositionColor(b.Components(), Color.Green);
+                v[3] = new VertexPositionColor(b.Components() + b.Origin(), Color.Green);
 
                 Vector c = a + b;
                 v[4] = new VertexPositionColor(c.Origin(), Color.Blue);
-                v[5] = new VertexPositionColor(c.Components(), Color.Blue);
+                v[5] = new VertexPositionColor(c.Components() + c.Origin(), Color.Blue);
 
                 Console.Write("a: ");
                 Console.WriteLine(a.Components());

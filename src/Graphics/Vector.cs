@@ -28,7 +28,7 @@ namespace Physics_Sim
 
                 float x = magnitude * (float)System.Math.Cos(System.Math.PI * direction / 180.0);
                 float y = magnitude * (float)System.Math.Sin(System.Math.PI * direction / 180.0);
-                components = new Vector3(x, y, 0) + this.origin;
+                components = new Vector3(x, y, 0);
             }
 
             public Vector(Vector3 origin, float magnitude, float direction)
