@@ -24,89 +24,94 @@ namespace Physics_Sim
                 );
             }
 
-            private void DrawQuadrent (BasicEffect effect, int x, int y, int z, bool grid = false)
+            private void DrawQuadrent(BasicEffect effect, int x, int y, int z)
             {
 
-                VertexPositionColor[] vectorVertices;
-                vectorVertices = new VertexPositionColor[Math.Abs(x) * 4 * 3 + 6];
-                
-                if (!grid)
-                { 
-                    vectorVertices[0] = new VertexPositionColor( new Vector3(0, 0, 0), Color.Black );
-                    vectorVertices[1] = new VertexPositionColor( new Vector3(x, 0, 0), Color.Black );
-                    vectorVertices[2] = new VertexPositionColor( new Vector3(0, 0, 0), Color.Black );
-                    vectorVertices[3] = new VertexPositionColor( new Vector3(0, y, 0), Color.Black );
-                    vectorVertices[4] = new VertexPositionColor( new Vector3(0, 0, 0), Color.Black );
-                    vectorVertices[5] = new VertexPositionColor( new Vector3(0, 0, z), Color.Black );
+                int max = (Math.Abs(x) > Math.Abs(y)) ? Math.Abs(x) : Math.Abs(y);
+                max = (max > Math.Abs(z)) ? max : Math.Abs(z);
+                VertexPositionColor[] v = new VertexPositionColor[max * 12 + 6];
 
-                    foreach (var pass in effect.CurrentTechnique.Passes)
-                    {
-                        pass.Apply ();
+                int x_sign = (x >= 0) ? 1 : -1;
+                int y_sign = (y >= 0) ? 1 : -1;
+                int z_sign = (z >= 0) ? 1 : -1;
 
-                        graphics.GraphicsDevice.DrawUserPrimitives (
-                            PrimitiveType.LineList,
-                            vectorVertices,
-                            0,
-                            3
-                        );
-                    }
-                }
-                else
+                bool xz_grid = true;
+                bool xy_grid = false;
+                bool yz_grid = false;
+
+                int j = 0;
+                float len = 0.05f;
+                float x_pos, y_pos, z_pos = 0.0f;
+                Color color = Color.Black;
+
+                for (int i = x_sign; Math.Abs(i) <= Math.Abs(x); i += x_sign)
                 {
-                    int j = 0;
-                    int i = 0;
+                    x_pos = i;
+                    y_pos = (yz_grid) ? y : y * len;
+                    z_pos = (xz_grid) ? z : z * len;
 
-                    int x_sign = (x >= 0) ? 1 : -1;
-                    int y_sign = (y >= 0) ? 1 : -1;
-                    int z_sign = (z >= 0) ? 1 : -1;
-                    for (i =x_sign; Math.Abs(i) <= Math.Abs(x); i+=x_sign)
-                    {
-                        // x-z axis
-                        vectorVertices[j++] = new VertexPositionColor( new Vector3(i, 0, 0), Color.LightBlue );
-                        vectorVertices[j++] = new VertexPositionColor( new Vector3(i, 0, z), Color.LightBlue );
-                        vectorVertices[j++] = new VertexPositionColor( 
-                            new Vector3(0, 0, z_sign * Math.Abs(i)), Color.LightBlue );
-                        vectorVertices[j++] = new VertexPositionColor( 
-                            new Vector3(x_sign * Math.Abs(z), 0, z_sign * Math.Abs(i)), Color.LightBlue );
+                    // xz axis
+                    color = (xz_grid) ? Color.LightBlue : Color.Black;
+                    v[j++] = new VertexPositionColor(new Vector3(x_pos, 0, 0), color);
+                    v[j++] = new VertexPositionColor(new Vector3(x_pos, 0, z_pos), color);
 
-                        // x-y axis
-                        vectorVertices[j++] = new VertexPositionColor( 
-                            new Vector3(0, y_sign * Math.Abs(i), 0), Color.LightBlue );
-                        vectorVertices[j++] = new VertexPositionColor( 
-                            new Vector3(0, y_sign * Math.Abs(i), z), Color.LightBlue );
-                        vectorVertices[j++] = new VertexPositionColor(
-                            new Vector3(0, 0, z_sign * Math.Abs(i)), Color.LightBlue );
-                        vectorVertices[j++] = new VertexPositionColor( 
-                            new Vector3(0, y_sign * Math.Abs(z), z_sign * Math.Abs(i)), Color.LightBlue );
+                    // yz axis
+                    color = (yz_grid) ? Color.LightBlue : Color.Black;
+                    v[j++] = new VertexPositionColor(new Vector3(x_pos, 0, 0), color);
+                    v[j++] = new VertexPositionColor(new Vector3(x_pos, y_pos, 0), color);
+                }
 
-                        // z-y axis
-                        vectorVertices[j++] = new VertexPositionColor( 
-                            new Vector3(0, y_sign * Math.Abs(i), 0), Color.LightBlue );
-                        vectorVertices[j++] = new VertexPositionColor( 
-                            new Vector3(x, y_sign * Math.Abs(i), 0), Color.LightBlue );
-                        vectorVertices[j++] = new VertexPositionColor( new Vector3(i, 0, 0), Color.LightBlue );
-                        vectorVertices[j++] = new VertexPositionColor( 
-                            new Vector3(i, y_sign * Math.Abs(x), 0), Color.LightBlue );
-                    }
+                for (int i = y_sign; Math.Abs(i) <= Math.Abs(y); i += y_sign)
+                {
+                    x_pos = (yz_grid) ? x : x * len;
+                    y_pos = i;
+                    z_pos = (xy_grid) ? z : z * len;
 
-                    vectorVertices[j++] = new VertexPositionColor( new Vector3(0, 0, 0), Color.Black );
-                    vectorVertices[j++] = new VertexPositionColor( new Vector3(x, 0, 0), Color.Black );
-                    vectorVertices[j++] = new VertexPositionColor( new Vector3(0, 0, 0), Color.Black );
-                    vectorVertices[j++] = new VertexPositionColor( new Vector3(0, y, 0), Color.Black );
-                    vectorVertices[j++] = new VertexPositionColor( new Vector3(0, 0, 0), Color.Black );
-                    vectorVertices[j++] = new VertexPositionColor( new Vector3(0, 0, z), Color.Black );
+                    // xy axis
+                    color = (xy_grid) ? Color.LightBlue : Color.Black;
+                    v[j++] = new VertexPositionColor(new Vector3(0, y_pos, 0), color);
+                    v[j++] = new VertexPositionColor(new Vector3(0, y_pos, z_pos), color);
 
-                    foreach (var pass in effect.CurrentTechnique.Passes)
-                    {
-                        pass.Apply ();
+                    // yz axis
+                    color = (yz_grid) ? Color.LightBlue : Color.Black;
+                    v[j++] = new VertexPositionColor(new Vector3(0, y_pos, 0), color);
+                    v[j++] = new VertexPositionColor(new Vector3(x_pos, y_pos, 0), color);
+                }
 
-                        graphics.GraphicsDevice.DrawUserPrimitives (
-                            PrimitiveType.LineList,
-                            vectorVertices,
-                            0,
-                            Math.Abs(x) * 2 * 3 + 3
-                        );
-                    }
+                for (int i = z_sign; Math.Abs(i) <= Math.Abs(z); i += z_sign)
+                {
+                    x_pos = (xz_grid) ? x : x * len;
+                    y_pos = (xy_grid) ? y : y * len;
+                    z_pos = i;
+
+                    // xz axis
+                    color = (xz_grid) ? Color.LightBlue : Color.Black;
+                    v[j++] = new VertexPositionColor(new Vector3(0, 0, z_pos), color);
+                    v[j++] = new VertexPositionColor(new Vector3(x_pos, 0, z_pos), color);
+
+                    // xy axis
+                    color = (xy_grid) ? Color.LightBlue : Color.Black;
+                    v[j++] = new VertexPositionColor(new Vector3(0, 0, z_pos), color);
+                    v[j++] = new VertexPositionColor(new Vector3(0, y_pos, z_pos), color);
+                }
+
+                v[j++] = new VertexPositionColor(new Vector3(0, 0, 0), Color.Black);
+                v[j++] = new VertexPositionColor(new Vector3(x, 0, 0), Color.Black);
+                v[j++] = new VertexPositionColor(new Vector3(0, 0, 0), Color.Black);
+                v[j++] = new VertexPositionColor(new Vector3(0, y, 0), Color.Black);
+                v[j++] = new VertexPositionColor(new Vector3(0, 0, 0), Color.Black);
+                v[j++] = new VertexPositionColor(new Vector3(0, 0, z), Color.Black);
+
+                foreach (var pass in effect.CurrentTechnique.Passes)
+                {
+                    pass.Apply();
+
+                    graphics.GraphicsDevice.DrawUserPrimitives(
+                        PrimitiveType.LineList,
+                        v,
+                        0,
+                        max * 6 + 3
+                    );
                 }
 
             }
@@ -120,22 +125,29 @@ namespace Physics_Sim
                 Vector3 cameraLookAtVector = Vector3.Zero;
                 Vector3 cameraUpVector = Vector3.UnitY;
                 effect.View = Matrix.CreateLookAt(cameraPosition, cameraLookAtVector, cameraUpVector);
-            
-                float aspectRatio = graphics.PreferredBackBufferWidth / (float) graphics.PreferredBackBufferHeight;
+
+                float aspectRatio = graphics.PreferredBackBufferWidth / (float)graphics.PreferredBackBufferHeight;
                 float fieldOfView = 0.50f;
                 float nearClipPlane = 1;
                 float farClipPlane = 200;
                 effect.Projection = Matrix.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, nearClipPlane, farClipPlane);
-                
-                DrawQuadrent(effect, 5, 5, 5);
-                DrawQuadrent(effect, 5, 5, -5);
-                DrawQuadrent(effect, 5, -5, 5);
-                DrawQuadrent(effect, 5, -5, -5);
-                DrawQuadrent(effect, -5, 5, 5);
-                DrawQuadrent(effect, -5, 5, -5);
-                DrawQuadrent(effect, -5, -5, 5);
-                DrawQuadrent(effect, -5, 5, -5);
-                
+
+                int x_min = -5;
+                int x_max = 5;
+                int y_min = -5;
+                int y_max = 5;
+                int z_min = -5;
+                int z_max = 5;
+
+                DrawQuadrent(effect, x_max, y_max, z_max);
+                DrawQuadrent(effect, x_max, y_max, z_min);
+                DrawQuadrent(effect, x_max, y_min, z_max);
+                DrawQuadrent(effect, x_max, y_min, z_min);
+                DrawQuadrent(effect, x_min, y_max, z_max);
+                DrawQuadrent(effect, x_min, y_max, z_min);
+                DrawQuadrent(effect, x_min, y_min, z_min);
+                DrawQuadrent(effect, x_min, y_min, z_min);
+
             }
         }
     }
