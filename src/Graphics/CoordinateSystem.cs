@@ -2,6 +2,8 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using System.Collections.Generic;
+
 namespace Physics_Sim
 {
     namespace Graphics
@@ -9,8 +11,7 @@ namespace Physics_Sim
         public class CoordinateSystem
         {
             private GraphicsDeviceManager graphics;
-
-
+            private List<Vector> vectors;
             private Vector3 cameraPosition;
             private float len;
             private bool xz_grid;
@@ -23,6 +24,7 @@ namespace Physics_Sim
             public CoordinateSystem(GraphicsDeviceManager graphics)
             {
                 this.graphics = graphics;
+                vectors = new List<Vector>();
 
                 // default camera is 3D
                 cameraPosition = new Vector3(25, 25, 25);
@@ -41,6 +43,24 @@ namespace Physics_Sim
                 z_range = new int[2];
                 x_range[0] = y_range[0] = z_range[0] = -5;
                 x_range[1] = y_range[1] = z_range[1] = 5;
+            }
+
+            public void AddVector(Vector vector)
+            {
+                vectors.Add(vector);
+
+                int x = (int)Math.Floor(vector.Origin().X + vector.Components().X + 0.5f);
+                int y = (int)Math.Floor(vector.Origin().Y + vector.Components().Y + 0.5f);
+                int z = (int)Math.Floor(vector.Origin().Z + vector.Components().Z + 0.5f);
+
+                x_range[0] = (x <= x_range[0]) ? x : x_range[0];
+                x_range[1] = (x >= x_range[1]) ? x : x_range[1];
+
+                y_range[0] = (y <= y_range[0]) ? y : y_range[0];
+                y_range[1] = (y >= y_range[1]) ? y : y_range[1];
+
+                z_range[0] = (z <= z_range[0]) ? z : z_range[0];
+                z_range[1] = (z >= z_range[1]) ? z : z_range[1];
             }
 
             private void DrawQuadrent(BasicEffect effect, int x, int y, int z)
@@ -145,7 +165,7 @@ namespace Physics_Sim
                 // change settings to 2D
                 xz_grid = false;
                 xy_grid = true;
-                cameraPosition = new Vector3(0, 0, 25);
+                cameraPosition = new Vector3(0, 0, 30);
 
 
 
@@ -160,37 +180,28 @@ namespace Physics_Sim
 
 
 
-                // draw a vector
-                VertexPositionColor[] v = new VertexPositionColor[6];
-
-                Vector a = new Vector(5, 37);
-                v[0] = new VertexPositionColor(a.Origin(), Color.Red);
-                v[1] = new VertexPositionColor(a.Components() + a.Origin(), Color.Red);
-
-
-                Vector b = new Vector(5, 53, a.Components());
-                v[2] = new VertexPositionColor(b.Origin(), Color.Green);
-                v[3] = new VertexPositionColor(b.Components() + b.Origin(), Color.Green);
-
-                Vector c = a + b;
-                v[4] = new VertexPositionColor(c.Origin(), Color.Blue);
-                v[5] = new VertexPositionColor(c.Components() + c.Origin(), Color.Blue);
-
-                Console.Write("a: ");
-                Console.WriteLine(a.Components());
-                Console.Write("b: ");
-                Console.WriteLine(b.Components());
-                Console.Write("c: ");
-                Console.WriteLine(c.Components());
-
-                foreach (var pass in effect.CurrentTechnique.Passes)
+                // draw vectors.
+                // TODO this will eventually need to draw by quadrent, otherwise lines overlap strange. Probably.
+                if (vectors.Count > 0)
                 {
-                    pass.Apply();
+                    VertexPositionColor[] v = new VertexPositionColor[vectors.Count * 2];
 
-                    graphics.GraphicsDevice.DrawUserPrimitives(
-                        PrimitiveType.LineList, v, 0,
-                        3
-                    );
+                    int count = 0;
+                    foreach (Vector vector in vectors)
+                    {
+                        v[count++] = new VertexPositionColor(vector.Origin(), Color.Red);
+                        v[count++] = new VertexPositionColor(vector.Components() + vector.Origin(), Color.Red);
+                    }
+
+                    foreach (var pass in effect.CurrentTechnique.Passes)
+                    {
+                        pass.Apply();
+
+                        graphics.GraphicsDevice.DrawUserPrimitives(
+                            PrimitiveType.LineList, v, 0,
+                            vectors.Count
+                        );
+                    }
                 }
 
 

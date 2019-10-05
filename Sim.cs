@@ -10,7 +10,6 @@ namespace Physics_Sim
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         CoordinateSystem system;
 
         public Sim()
@@ -24,6 +23,13 @@ namespace Physics_Sim
         {
             // TODO: Add your initialization logic here
             system = new CoordinateSystem(graphics);
+
+            Vector a = new Vector(5, 35);
+            Vector b = new Vector(5, 57, a.Components());
+
+            system.AddVector(a);
+            system.AddVector(b);
+            system.AddVector(a + b);
 
             // This part is just for testing, getting prepped to set up the vector class.
 
