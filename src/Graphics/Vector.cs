@@ -8,34 +8,58 @@ namespace Physics_Sim
     {
         public class Vector
         {
-            double[] components;
+            Vector3 components;
+            Vector3 origin;
+
             public Vector(float magnitude, float direction)
             {
-                components = new double[2];
-                components[0] = magnitude * System.Math.Cos(System.Math.PI * direction / 180.0);
-                components[1] = magnitude * System.Math.Sin(System.Math.PI * direction / 180.0);
+                // if no origin is specified, it is assumed to be (0, 0, 0)
+                origin = new Vector3(0, 0, 0);
+
+                // the direction provided is assumed the be a degree offset from the +x axis.
+                float x = magnitude * (float)System.Math.Cos(System.Math.PI * direction / 180.0);
+                float y = magnitude * (float)System.Math.Sin(System.Math.PI * direction / 180.0);
+                components = new Vector3(x, y, 0);
             }
-            public Vector(float x, float y, float z, float a)
+
+            public Vector(float magnitude, float direction, Vector3 origin)
             {
-                components = new double[4];
-                components[0] = x;
-                components[1] = y;
-                components[2] = z;
-                components[3] = a;
+                this.origin = origin;
+
+                float x = magnitude * (float)System.Math.Cos(System.Math.PI * direction / 180.0);
+                float y = magnitude * (float)System.Math.Sin(System.Math.PI * direction / 180.0);
+                components = new Vector3(x, y, 0);
             }
 
-            public double this[int index] { get => components[index]; }
-
-            public static Vector operator *(Matrix matrix, Vector vector)
+            public Vector(Vector3 origin, float magnitude, float direction)
             {
-                float x = (float) ( (matrix[0, 0] * vector[0]) + (matrix[0, 1] * vector[1]) + (matrix[0, 2] * vector[2]) + (matrix[0, 3] * vector[3]));
-                float y = (float) ( (matrix[1, 0] * vector[0]) + (matrix[1, 1] * vector[1]) + (matrix[1, 2] * vector[2]) + (matrix[1, 3] * vector[3]));
-                float z = (float) ( (matrix[2, 0] * vector[0]) + (matrix[2, 1] * vector[1]) + (matrix[2, 2] * vector[2]) + (matrix[2, 3] * vector[3]));
-                float a = (float) ( (matrix[3, 0] * vector[0]) + (matrix[3, 1] * vector[1]) + (matrix[3, 2] * vector[2]) + (matrix[3, 3] * vector[3]));
-                return new Vector(x, y, z, a);
+                this.origin = origin;
+
+                float x = magnitude * (float)System.Math.Cos(System.Math.PI * direction / 180.0);
+                float y = magnitude * (float)System.Math.Sin(System.Math.PI * direction / 180.0);
+                components = new Vector3(x, y, 0) + this.origin;
             }
 
-            public static Vector operator *(Vector vector, Matrix matrix) { return matrix * vector; }
+            public Vector(Vector3 origin, Vector3 components)
+            {
+                this.origin = origin;
+
+                this.components = components;
+            }
+
+            public Vector Add(Vector b)
+            {
+                Vector3 components = this.components + b.Components();
+                return new Vector(origin, components);
+            }
+
+            public Vector3 Origin() { return origin; }
+            public Vector3 Components() { return components; }
+
+            public static Vector operator +(Vector a, Vector b)
+            {
+                return a.Add(b);
+            }
         }
     }
 }

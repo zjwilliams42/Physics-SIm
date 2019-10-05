@@ -20,3 +20,14 @@ C:\Users\Zachary\Documents\Physics Sim\Physics-SIm\obj\Debug\netcoreapp2.0\Physi
 C:\Users\Zachary\Documents\Physics Sim\Physics-SIm\obj\Debug\netcoreapp2.0\Physics Sim.dll
 C:\Users\Zachary\Documents\Physics Sim\Physics-SIm\obj\Debug\netcoreapp2.0\Physics Sim.pdb
 C:\Users\Zachary\Documents\Physics Sim\Physics-Sim\obj\Debug\netcoreapp2.0\Physics Sim.csproj.CoreCompileInputs.cache
+C:\Users\zjwil\Documents\Physics Sim\Physics-Sim\bin\Debug\netcoreapp2.0\Physics Sim.deps.json
+C:\Users\zjwil\Documents\Physics Sim\Physics-Sim\bin\Debug\netcoreapp2.0\Physics Sim.runtimeconfig.json
+C:\Users\zjwil\Documents\Physics Sim\Physics-Sim\bin\Debug\netcoreapp2.0\Physics Sim.runtimeconfig.dev.json
+C:\Users\zjwil\Documents\Physics Sim\Physics-Sim\bin\Debug\netcoreapp2.0\Physics Sim.dll
+C:\Users\zjwil\Documents\Physics Sim\Physics-Sim\bin\Debug\netcoreapp2.0\Physics Sim.pdb
+C:\Users\zjwil\Documents\Physics Sim\Physics-Sim\obj\Debug\netcoreapp2.0\Physics Sim.csprojAssemblyReference.cache
+C:\Users\zjwil\Documents\Physics Sim\Physics-Sim\obj\Debug\netcoreapp2.0\Physics Sim.csproj.CoreCompileInputs.cache
+C:\Users\zjwil\Documents\Physics Sim\Physics-Sim\obj\Debug\netcoreapp2.0\Physics Sim.AssemblyInfoInputs.cache
+C:\Users\zjwil\Documents\Physics Sim\Physics-Sim\obj\Debug\netcoreapp2.0\Physics Sim.AssemblyInfo.cs
+C:\Users\zjwil\Documents\Physics Sim\Physics-Sim\obj\Debug\netcoreapp2.0\Physics Sim.dll
+C:\Users\zjwil\Documents\Physics Sim\Physics-Sim\obj\Debug\netcoreapp2.0\Physics Sim.pdb
