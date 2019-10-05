@@ -583,7 +583,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.0.0": {
-      "sha512": "VdLJOCXhZaEMY7Hm2GKiULmn7IEPFE4XC5LPSfBVCUIA8YLZVh846gtfBJalsPQF2PlzdD7ecX7DZEulJ402ZQ==",
+      "sha512": "CCf4NjmDOoise7FAij2VPuHIgKKsu696vkTwhOkPVQfLsTmB2WLFfQ4yeO5Udtk8FD636UBMx6Y9eovzJKT76A==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.0.0",
       "files": [
@@ -822,28 +822,30 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Zachary\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\zjwil\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Zachary\\Documents\\Physics Sim\\Physics-Sim\\Physics Sim.csproj",
+      "projectUniqueName": "C:\\Users\\zjwil\\Documents\\Physics Sim\\Physics-Sim\\Physics Sim.csproj",
       "projectName": "Physics Sim",
-      "projectPath": "C:\\Users\\Zachary\\Documents\\Physics Sim\\Physics-Sim\\Physics Sim.csproj",
-      "packagesPath": "C:\\Users\\Zachary\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Zachary\\Documents\\Physics Sim\\Physics-Sim\\obj\\",
+      "projectPath": "C:\\Users\\zjwil\\Documents\\Physics Sim\\Physics-Sim\\Physics Sim.csproj",
+      "packagesPath": "C:\\Users\\zjwil\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\zjwil\\Documents\\Physics Sim\\Physics-Sim\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Zachary\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\zjwil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
