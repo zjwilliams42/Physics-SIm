@@ -217,7 +217,7 @@ namespace Physics_Sim
                     {
                         Vector3 min = new Vector3(x_range[0], y_range[0], z_range[0]);
                         Vector3 max = new Vector3(x_range[1], y_range[1], z_range[1]);
-                        Vector3 step = new Vector3(0.5f, 0.5f, 0.5f);
+                        Vector3 step = new Vector3(0.1f, 0.1f, 0.1f);
                         Vector3[] points = line.GetPoints(min, max, step);
 
                         VertexPositionColor[] v = new VertexPositionColor[points.Length];

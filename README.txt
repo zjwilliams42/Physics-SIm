@@ -22,6 +22,3 @@ http://mboshart.dyndns.org/~mboshart/4750programs.html
 
 Microsoft Docs for Xna:
 https://docs.microsoft.com/en-us/xamarin/graphics-games/monogame/3d/part2
-
-Clipping via Cohen-Sutherland:
-https://www.geeksforgeeks.org/line-clipping-set-1-cohen-sutherland-algorithm/

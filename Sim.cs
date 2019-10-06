@@ -31,8 +31,17 @@ namespace Physics_Sim
             //system.AddVector(a);
             //system.AddVector(b);
             //system.AddVector(a + b);
+            Line line = new Line(new LinearEquation(1, 0));
+            line.AddEquation(new LinearEquation(1, 0));
+            //system.AddLine(line);
 
-            system.AddLine(new Line(new LinearEquation(1, -1)));
+            float[] constants = new float[4];
+            constants[0] = 0;
+            constants[1] = 1;
+            constants[2] = 1;
+            constants[3] = 1;
+            line = new Line(new QuadraticEquation(constants));
+            system.AddLine(line);
 
             // This part is just for testing, getting prepped to set up the vector class.
 

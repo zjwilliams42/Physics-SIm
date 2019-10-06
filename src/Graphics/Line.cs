@@ -29,6 +29,10 @@ namespace Physics_Sim
                 }
             }
 
+            public void AddEquation(Equation equation)
+            {
+                equations.Add(equation);
+            }
             public Vector3[] GetPoints(Vector3 min, Vector3 max, Vector3 step)
             {
                 List<Vector3> points = new List<Vector3>();
@@ -49,7 +53,7 @@ namespace Physics_Sim
                 float result = 0;
                 foreach (Equation equation in equations)
                 {
-                    result = equation.Solve(x);
+                    result += equation.Solve(x);
                 }
                 return result;
             }
