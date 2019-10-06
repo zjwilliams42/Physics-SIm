@@ -12,6 +12,7 @@ namespace Physics_Sim
         {
             private GraphicsDeviceManager graphics;
             private List<Vector> vectors;
+            private List<Line> lines;
             private Vector3 cameraPosition;
             private float len;
             private bool xz_grid;
@@ -25,6 +26,7 @@ namespace Physics_Sim
             {
                 this.graphics = graphics;
                 vectors = new List<Vector>();
+                lines = new List<Line>();
 
                 // default camera is 3D
                 cameraPosition = new Vector3(25, 25, 25);
@@ -43,6 +45,11 @@ namespace Physics_Sim
                 z_range = new int[2];
                 x_range[0] = y_range[0] = z_range[0] = -5;
                 x_range[1] = y_range[1] = z_range[1] = 5;
+            }
+
+            public void AddLine(Line line)
+            {
+                lines.Add(line);
             }
 
             public void AddVector(Vector vector)
@@ -204,8 +211,32 @@ namespace Physics_Sim
                     }
                 }
 
+                if (lines.Count > 0)
+                {
+                    foreach (Line line in lines)
+                    {
+                        Vector3 min = new Vector3(x_range[0], y_range[0], z_range[0]);
+                        Vector3 max = new Vector3(x_range[1], y_range[1], z_range[1]);
+                        Vector3 step = new Vector3(0.5f, 0.5f, 0.5f);
+                        Vector3[] points = line.GetPoints(min, max, step);
 
+                        VertexPositionColor[] v = new VertexPositionColor[points.Length];
+                        for (int i = 0; i < points.Length; i++)
+                        {
+                            v[i] = new VertexPositionColor(points[i], Color.Blue);
+                        }
 
+                        foreach (var pass in effect.CurrentTechnique.Passes)
+                        {
+                            pass.Apply();
+
+                            graphics.GraphicsDevice.DrawUserPrimitives(
+                                PrimitiveType.LineList, v, 0,
+                                points.Length / 2
+                            );
+                        }
+                    }
+                }
             }
         }
     }

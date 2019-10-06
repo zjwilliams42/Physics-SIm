@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using Physics_Sim.Graphics;
+using Physics_Sim.Equations;
 
 namespace Physics_Sim
 {
@@ -24,12 +25,14 @@ namespace Physics_Sim
             // TODO: Add your initialization logic here
             system = new CoordinateSystem(graphics);
 
-            Vector a = new Vector(5, 35);
-            Vector b = new Vector(5, 57, a.Components());
+            //Vector a = new Vector(5, 35);
+            //Vector b = new Vector(5, 57, a.Components());
 
-            system.AddVector(a);
-            system.AddVector(b);
-            system.AddVector(a + b);
+            //system.AddVector(a);
+            //system.AddVector(b);
+            //system.AddVector(a + b);
+
+            system.AddLine(new Line(new LinearEquation(1, -1)));
 
             // This part is just for testing, getting prepped to set up the vector class.
 
